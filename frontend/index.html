@@ -6,6 +6,22 @@
     <title>Login</title>
 </head>
 <body>
-    
+    <main>
+        <section class="titulo">
+            <h1>Login:</h1>
+        </section>
+
+        <section class="formulario">
+            <form action="/login" method="POST">
+                <label for="username">Usuário:</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password" required>
+                
+                <button type="submit">Entrar</button>
+            </form>
+        </section>
+    </main>       
 </body>
 </html>
