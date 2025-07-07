@@ -1,21 +1,82 @@
 html, body {
     height: 100%;
-    margin: 0
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #c3ffa8;
 }
 
 body{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
+     align-items: center;
 }
 
 .pagina{
     background: white;
-    padding: 2rem;
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    width: 100%;
+    max-width: 350px;
+    transition: transform 0.3s ease;
+}
+
+.pagina:hover {
+    transform: translateY(-3px);
+}
+
+.titulo h1 {
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    color: #800080;
+    text-align: center;
+}
+
+.formulario form {
+    display: flex;
+    flex-direction: column;
+}
+
+.formulario label {
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    color: #333333;
+}
+
+.formulario input {
+    padding: 0.75rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid #ccc;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    width: 300px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.formulario input:focus {
+    border-color: #7FFF7F;
+    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+    outline: none;
+}
+
+button{
+    padding: 0.75rem;
+    background-color: #800080;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s;
+}
+
+button:hover {
+    background-color: #660066;
+    transform: scale(1.02);
+}
+
+button:focus {
+    outline: 2px solid #7FFF7F;
+    outline-offset: 2px;
 }
