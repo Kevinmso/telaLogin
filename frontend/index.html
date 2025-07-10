@@ -4,25 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <title>Login</title>
+    <title>Login e Registro</title>
 </head>
 <body>
     <div class="pagina">
         <div class="titulo">
-            <h1>Login:</h1>
+            <h1 id="form-title">Login:</h1>
         </div>
 
         <div class="formulario">
-            <form action="/login" method="POST">
+            <form id="auth-form">
                 <label for="username">Usuário:</label>
                 <input type="text" id="username" name="username" required>
 
                 <label for="password">Senha:</label>
                 <input type="password" id="password" name="password" required>
 
-                <button type="submit">Entrar</button>
+                <button type="submit" id="submit-button">Entrar</button>
             </form>
+
+            <p id="modo-texto">
+                Não tem conta? <a href="#" id="alternar-modo">Criar Conta</a>
+            </p>
         </div>
-    </div>       
+    </div>
+
+    <script>
+    let modo = "login"; // ou "register"
+
+    const form = document.getElementById("auth-form");
+    const titulo = document.getElementById("form-title");
+    const botao = document.getElementById("submit-button");
+    const alternarTexto = document.getElementById("modo-texto");
+
+    function atualizarModo() {
+        if (modo === "login") {
+            titulo.textContent = "Criar Conta:";
+            botao.textContent = "Registrar";
+            alternarTexto.innerHTML = 'Já tem conta? <a href="#" id="alternar-modo">Entrar</a>';
+            modo = "register";
+        } else {
+            titulo.textContent = "Login:";
+            botao.textContent = "Entrar";
+            alternarTexto.innerHTML = 'Não tem conta? <a href="#" id="alternar-modo">Criar Conta</a>';
+            modo = "login";
+        }
+
+        // Reanexar o event listener no novo link
+        document.getElementById("alternar-modo").addEventListener("click", function (e) {
+            e.preventDefault();
+            atualizarModo();
+        });
+    }
+
+    // Primeiro listener
+    document.getElementById("alternar-modo").addEventListener("click", function (e) {
+        e.preventDefault();
+        atualizarModo();
+    });
+
+    form.addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        const endpoint = modo === "login" ? "login" : "register";
+
+        try {
+            const response = await fetch(`http://localhost:8080/api/${endpoint}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ username, password })
+            });
+
+            const mensagem = await response.text();
+            alert(mensagem);
+        } catch (error) {
+            alert("Erro ao conectar com o servidor.");
+            console.error(error);
+        }
+    });
+    </script>
 </body>
 </html>
